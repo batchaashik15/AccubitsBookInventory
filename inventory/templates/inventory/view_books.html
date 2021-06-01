@@ -1,0 +1,28 @@
+{% extends "inventory/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Book id</th>
+      <th scope="col">Book name</th>
+      <th scope="col">Author</th>
+      <th scope="col">Available</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <th scope="row">{{book.id}}</th>
+      <td>{{book.book_name}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.book_count}}</td>
+      <td><a href="{% url 'view_book' book.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}

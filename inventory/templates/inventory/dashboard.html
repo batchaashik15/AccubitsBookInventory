@@ -1,0 +1,30 @@
+{% extends "inventory/main.html" %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+<h1>Book borrowed by you</h1>
+<br><hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Book id</th>
+      <th scope="col">Book name</th>
+      <th scope="col">Author</th>
+      <th scope="col">Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <th scope="row">{{book.id}}</th>
+      <td>{{book.book.book_name}}</td>
+      <td>{{book.book.author}}</td>
+      <td>{{book.quantity}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
