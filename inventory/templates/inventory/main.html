@@ -34,9 +34,9 @@
                 <li class="nav-item {{ completed }}">
                     <a class="nav-link" href="{% url 'view_books' %}">Views Books</a>
                 </li>
-                <!--<li class="nav-item {{ create }}">
-                    <a class="nav-link" href="#">Create</a>
-                </li>-->
+                <li class="nav-item {{ create }}">
+                    <a class="nav-link" href="{% url 'borrow_book' %}">Borrow</a>
+                </li>
 
         </ul>
     {% endif %}

@@ -1,0 +1,14 @@
+{% extends "inventory/main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>Borrow</h1>
+<hr>
+<form method="POST">
+  {% csrf_token %}
+  {{form|crispy}}
+  <input type="submit" class="btn btn-primary" value="Borrow">
+</form>
+
+
+{% endblock content %}

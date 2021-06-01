@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
-from .forms import CreateBookForm
+from .forms import CreateBookForm, BorrowForms
 from .models import Books, Borrow
 
 
@@ -78,3 +78,16 @@ def view_book(request, pk):
     books = Books.objects.get(id=pk)
     context = {"book": books}
     return render(request, 'inventory/view_book.html', context)
+
+
+@login_required
+def borrow_book(request):
+    form = BorrowForms()
+    if request.method == "POST":
+        form = BorrowForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+
+    context = {'form': form}
+    return render(request, 'inventory/borrow_book.html', context)
