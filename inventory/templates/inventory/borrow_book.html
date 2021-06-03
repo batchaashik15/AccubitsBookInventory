@@ -4,11 +4,36 @@
 
 <h1>Borrow</h1>
 <hr>
-<form method="POST">
-  {% csrf_token %}
-  {{form|crispy}}
-  <input type="submit" class="btn btn-primary" value="Borrow">
-</form>
+<div class="col-md-7">
+  <h5>LAST 5 Borrows</h5>
+  <hr>
+  <div class="card card-body">
+    <table class="table table-sm">
+      <tr>
+        <th scope="col">Customer name</th>
+        <th scope="col">Book id</th>
+        <th scope="col">Book name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Available</th>
+        <th scope="col">To Borrow</th>
+      </tr>
+
+      {% for book in books %}
+      <tr>
+        <td>{{user.username}}</td>
+        <td>{{book.book.id}}</td>
+        <td>{{book.book.book_name}}</td>
+        <td>{{book.book.author}}</td>
+        <td>{{book.quantity}}</td>
+        <td><a href="">Borrow</a></td>
+      </tr>
+
+      {% endfor %}
+
+
+    </table>
+  </div>
+</div>
 
 
 {% endblock content %}

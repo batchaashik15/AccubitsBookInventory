@@ -1,0 +1,71 @@
+{% extends "inventory/main.html" %}
+
+{% block content %}
+<br>
+<h1>User Dashboard</h1>
+<hr>
+<h1>Book borrowed by "{{request.user.first_name.capitalize}}"</h1>
+<br>
+
+<div class="row">
+	<div class="col-md-7">
+		<h5>LAST 5 Borrows</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+          <th scope="col">Book name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Available</th>
+          <th scope="col">To Borrow</th>
+          <th scope="col">Return</th>
+				</tr>
+
+				{% for borrow in borrows %}
+				<tr>
+					<td>{{borrow.book.book_name}}</td>
+          <td>{{borrow.book.author}}</td>
+					<td>{{borrow.quantity}}</td>
+          <td><a href="{% url 'borrow_book' borrow.book.id %}">Add more</a></td>
+          <td><a href="{% url 'return_book' borrow.book.id %}">Return</a></td>
+				</tr>
+
+				{% endfor %}
+
+
+			</table>
+		</div>
+	</div>
+  <div class="col-md-5">
+		<h5>Books available</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+
+				<tr>
+          <th scope="col">Book name</th>
+          <th scope="col">Author</th>
+          <th scope="col">Available</th>
+          <th scope="col"></th>
+				</tr>
+
+        {% for book in books %}
+				<tr>
+					<td>{{book.book_name}}</td>
+          <td>{{book.author}}</td>
+					<td>{{book.book_count}}</td>
+          <td><a href="{% url 'borrow_book' book.id %}">Borrow</a></td>
+				</tr>
+        {% empty %}
+          <h4>No books available now!</h4>
+          <hr>
+				{% endfor %}
+
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock content %}

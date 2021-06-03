@@ -15,52 +15,7 @@
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-light bg-warning">
-<div class="container">
-    <a class="navbar-brand" href="{% url 'dashboard' %}">
-         <img src="{% static 'images/logo.png' %}" width="30" height="30" class="d-inline-block align-top">
-        <span>AccubitsBooks</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    {% if user.is_authenticated %}
-        <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item {{ current }}">
-                    <a class="nav-link" href="{% url 'create_book' %}">Create book</a>
-                </li>
-                <li class="nav-item {{ completed }}">
-                    <a class="nav-link" href="{% url 'view_books' %}">Views Books</a>
-                </li>
-                <li class="nav-item {{ create }}">
-                    <a class="nav-link" href="{% url 'borrow_book' %}">Borrow</a>
-                </li>
-
-        </ul>
-    {% endif %}
-    <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
-                    <form style='display: none;' method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button id="signOutBtn" type="submit">Logout</button>
-                    </form>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
-</nav>
+{% include 'inventory/navbar.html' %}
 
 <div class="container">
 {% block content %}{% endblock %}

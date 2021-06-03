@@ -1,31 +1,98 @@
 {% extends "inventory/main.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <br>
-<h1>Dashboard</h1>
-<hr>
-<h1>Book borrowed by you</h1>
+<h3>Admin Dashboard</h3>
+<br>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card card-body">
+			<form method="get">
+				{% csrf_token %}
+				{{myFilter.form}}
+				<input type="submit" class="btn btn-primary" value="Filter">
+			</form>
+		</div>
+	</div>
+</div>
 <br>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Book id</th>
-      <th scope="col">Book name</th>
-      <th scope="col">Author</th>
-      <th scope="col">Available</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for book in books %}
-    <tr>
-      <th scope="row">{{book.id}}</th>
-      <td>{{book.book.book_name}}</td>
-      <td>{{book.book.author}}</td>
-      <td>{{book.quantity}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="row">
+	<div class="col-md-2">
+		<h5>CUSTOMERS:</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Customers</th>
+				</tr>
+				{% for user in users %}
+				<tr>
+					<td>{{user.first_name}}</td>
+				</tr>
+
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-5">
+		<h5>Borrows</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+          <th scope="col">Customer name</th>
+          <th scope="col">Book name</th>
+          <th scope="col">Borrowed</th>
+				</tr>
+
+				{% for borrow in borrows %}
+				<tr>
+					<td>{{borrow.user.first_name}}</td>
+					<td>{{borrow.book.book_name}}</td>
+					<td>{{borrow.quantity}}</td>
+        </tr>
+
+				{% endfor %}
+
+
+			</table>
+		</div>
+	</div>
+
+  	<div class="col-md-5">
+  		<h5>Available Books</h5>
+  		<hr>
+  		<div class="card card-body">
+  			<table class="table table-sm">
+  				<tr>
+            <th scope="col">Book name</th>
+            <th scope="col">Availble</th>
+            <th scope="col">Add stock</th>
+  				</tr>
+
+  				{% for book in books %}
+  				<tr>
+  					<td>{{book.book_name}}</td>
+            {% if book.book_count == 0 %}
+  					  <td style="background-color:orange;">{{book.book_count}}</td>
+            {% else %}
+              <td>{{book.book_count}}</td>
+            {% endif %}
+            <td><a href="{% url 'update_stock' book.id %}">Add stock</a></td>
+          </tr>
+
+  				{% endfor %}
+
+
+  			</table>
+  		</div>
+  	</div>
+
+</div>
+
+
 
 {% endblock content %}
