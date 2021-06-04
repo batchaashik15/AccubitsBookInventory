@@ -28,7 +28,7 @@
 				</tr>
 				{% for user in users %}
 				<tr>
-					<td>{{user.first_name}}</td>
+					<td>{{user.first_name.capitalize}}</td>
 				</tr>
 
 				{% endfor %}
@@ -50,7 +50,7 @@
 
 				{% for borrow in borrows %}
 				<tr>
-					<td>{{borrow.user.first_name}}</td>
+					<td>{{borrow.user.first_name.capitalize}}</td>
 					<td>{{borrow.book.book_name}}</td>
 					<td>{{borrow.quantity}}</td>
         </tr>
@@ -81,7 +81,7 @@
             {% else %}
               <td>{{book.book_count}}</td>
             {% endif %}
-            <td><a href="{% url 'update_stock' book.id %}">Add stock</a></td>
+            <td><a class="btn btn-primary" href="{% url 'update_stock' book.id %}">Add stock</a></td>
           </tr>
 
   				{% endfor %}

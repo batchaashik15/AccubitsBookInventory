@@ -1,7 +1,9 @@
 {% extends "inventory/main.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+<br>
+<h2>Create Books</h2>
+<br>
 <form method="POST">
   {% csrf_token %}
   {{form|crispy}}

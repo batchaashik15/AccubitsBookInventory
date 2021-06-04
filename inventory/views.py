@@ -53,7 +53,7 @@ def logoutuser(request):
 @login_required(login_url="login")
 @admin_only
 def dashboard(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_staff=False)
     borrows = Borrow.objects.all()
 
     myFilter = BorrowFilter(request.GET, queryset=borrows)

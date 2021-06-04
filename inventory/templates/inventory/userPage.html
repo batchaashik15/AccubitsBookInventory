@@ -16,8 +16,8 @@
 				<tr>
           <th scope="col">Book name</th>
           <th scope="col">Author</th>
-          <th scope="col">Available</th>
-          <th scope="col">To Borrow</th>
+          <th scope="col">Borrowed</th>
+          <th scope="col">Borrow</th>
           <th scope="col">Return</th>
 				</tr>
 
@@ -26,10 +26,12 @@
 					<td>{{borrow.book.book_name}}</td>
           <td>{{borrow.book.author}}</td>
 					<td>{{borrow.quantity}}</td>
-          <td><a href="{% url 'borrow_book' borrow.book.id %}">Add more</a></td>
-          <td><a href="{% url 'return_book' borrow.book.id %}">Return</a></td>
+          <td><a class="btn btn-primary" href="{% url 'borrow_book' borrow.book.id %}">Borrow</a></td>
+          <td><a class="btn btn-primary" href="{% url 'return_book' borrow.book.id %}">Return</a></td>
 				</tr>
-
+				{% empty %}
+					<h3>No Books Borrowed yet!</h3>
+					<br>
 				{% endfor %}
 
 
@@ -46,7 +48,7 @@
           <th scope="col">Book name</th>
           <th scope="col">Author</th>
           <th scope="col">Available</th>
-          <th scope="col"></th>
+          <th scope="col">Borrow</th>
 				</tr>
 
         {% for book in books %}
@@ -54,7 +56,7 @@
 					<td>{{book.book_name}}</td>
           <td>{{book.author}}</td>
 					<td>{{book.book_count}}</td>
-          <td><a href="{% url 'borrow_book' book.id %}">Borrow</a></td>
+          <td><a class="btn btn-primary" href="{% url 'borrow_book' book.id %}">Borrow</a></td>
 				</tr>
         {% empty %}
           <h4>No books available now!</h4>
